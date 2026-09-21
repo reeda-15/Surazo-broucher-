@@ -1,0 +1,3 @@
+# Visual direction
+
+Mode: Persuade. Precise industrial editorial design, using the supplied Surazo assets. White and pale blue-gray reading surfaces contrast with deep navy engineering and contact sections. Electric blue marks action and emphasis. Manrope display typography, DM Sans body typography, spacious layouts, fine rules and modest rectangular corners. The hero uses the isolated circular cover as a large product sculpture against restrained concentric geometry. Product content leads into material engineering, specification, company story and enquiry. Responsive mobile layouts preserve every function. Reduced-motion support and visible keyboard focus are required.

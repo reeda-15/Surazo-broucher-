@@ -66,3 +66,5 @@ html{scroll-padding-top:24px}
 .proof-grid strong .stat-number{font:inherit;letter-spacing:inherit;margin:0;display:inline-block;font-variant-numeric:tabular-nums}.proof-grid>div:first-child .stat-number{min-width:2ch}.proof-grid>div:nth-child(2) .stat-number{min-width:8ch}
 
 .comparison-scroll .material-thumbnail{background:transparent;border-radius:0}
+
+.comparison-scroll .surazo-material-thumbnail{width:132px;height:132px;max-width:100%;image-rendering:auto}@media(max-width:600px){.comparison-scroll .surazo-material-thumbnail{width:104px;height:104px}}

@@ -64,3 +64,5 @@ html{scroll-padding-top:24px}
 .material-heading{display:flex;flex-direction:column;align-items:flex-start;gap:12px}.comparison-scroll .material-thumbnail{display:block;width:96px;height:66px;overflow:hidden;border-radius:5px;stroke:none;fill:none}.comparison-scroll thead th{vertical-align:bottom}@media(max-width:600px){.comparison-scroll .material-thumbnail{width:78px;height:54px}.material-heading{gap:10px}}
 
 .proof-grid strong .stat-number{font:inherit;letter-spacing:inherit;margin:0;display:inline-block;font-variant-numeric:tabular-nums}.proof-grid>div:first-child .stat-number{min-width:2ch}.proof-grid>div:nth-child(2) .stat-number{min-width:8ch}
+
+.comparison-scroll .material-thumbnail{background:transparent;border-radius:0}

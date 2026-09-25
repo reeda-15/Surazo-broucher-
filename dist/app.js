@@ -8,19 +8,30 @@ document.addEventListener('click', event => { if (!event.target.closest('.header
 const productSelect = document.querySelector('#quote-product');
 document.querySelectorAll('[data-product]').forEach(button => button.addEventListener('click', () => { productSelect.value = button.dataset.product; document.querySelector('#contact').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}); productSelect.focus({preventScroll:true}); }));
 const grades = {
- A15: ['Made for everyday footfall.', 'For pedestrian and cycle applications. Share your cover size, installation location and project requirements with our team to confirm suitability.'],
+ A125: ['Made for everyday footfall.', 'For pedestrian and cycle applications. Share your cover size, installation location and project requirements with our team to confirm suitability.'],
  B125: ['A fit for pedestrian spaces.', 'Listed in our brochure for footpath applications. Share the installation conditions and any vehicle access requirements so our team can confirm the appropriate specification.'],
  C250: ['Designed around the kerb.', 'For kerb and channel applications. Share your drainage layout, cover dimensions and installation conditions with our team to confirm suitability.'],
  D400: ['Ready for the road ahead.', 'For road and carriageway applications. Share your cover size, installation location and project requirements with our team to confirm suitability.']
 };
 const gradeTabs = [...document.querySelectorAll('[role="tab"]')];
+const gradeImages = {
+ A125: ['application-pedestrian.webp', 'Surazo cover in a pedestrian walkway', 'Pedestrian spaces'],
+ B125: ['application-footpath.webp', 'Surazo cover on a paved footpath beside the road; the illustrated cover is marked C250', 'Footpath setting · pictured cover marked C250'],
+ C250: ['application-drainage.webp', 'Surazo drainage cover beside a kerb in rainfall', 'Kerb & channel drainage'],
+ D400: ['application-utilities.webp', 'Surazo square cover installed in a roadway', 'Road & carriageway applications']
+};
 let selectedGrade = 'D400';
 function selectGrade(tab) {
  selectedGrade = tab.dataset.grade;
  gradeTabs.forEach(item => { item.setAttribute('aria-selected', String(item === tab)); item.tabIndex = item === tab ? 0 : -1; });
  document.querySelector('#grade-value').textContent = selectedGrade;
+ document.querySelector('#grade-rating').textContent = selectedGrade === 'A125' ? 'Contact us to confirm the load rating' : ({B125:'12.5 T',C250:'25 T',D400:'40 T'})[selectedGrade] + ' · brochure load reference';
  document.querySelector('#grade-title').textContent = grades[selectedGrade][0];
  document.querySelector('#grade-description').textContent = grades[selectedGrade][1];
+ const [image, alt, caption] = gradeImages[selectedGrade];
+ document.querySelector('#grade-image').src = 'assets/' + image;
+ document.querySelector('#grade-image').alt = alt;
+ document.querySelector('#grade-image-caption').textContent = caption;
  document.querySelector('#load-panel').setAttribute('aria-labelledby', tab.id);
 }
 gradeTabs.forEach((tab,index) => {
@@ -37,3 +48,6 @@ function showStatus(message) { const status = document.querySelector('#form-stat
 form.addEventListener('submit', event => { event.preventDefault(); if (!form.reportValidity()) return; window.open(`https://wa.me/919766611880?text=${encodeURIComponent(enquiryText())}`, '_blank', 'noopener,noreferrer'); showStatus('Your enquiry is ready in WhatsApp. Review it and tap Send to share it with Surazo. If WhatsApp did not open, choose “Prefer email?”.'); });
 document.querySelector('#email-enquiry').addEventListener('click', () => { if (!form.reportValidity()) return; window.location.href = `mailto:support@surazocovers.com?subject=${encodeURIComponent('Product quotation enquiry — Surazo')}&body=${encodeURIComponent(enquiryText())}`; showStatus('Your email app will open with a draft enquiry. Review and send it to request a quote.'); });
 document.querySelector('#year').textContent = new Date().getFullYear();
+
+const requestedProduct = new URLSearchParams(window.location.search).get('product');
+if (requestedProduct && [...productSelect.options].some(option => option.value === requestedProduct)) productSelect.value = requestedProduct;

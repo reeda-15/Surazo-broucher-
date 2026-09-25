@@ -51,3 +51,9 @@ document.querySelector('#year').textContent = new Date().getFullYear();
 
 const requestedProduct = new URLSearchParams(window.location.search).get('product');
 if (requestedProduct && [...productSelect.options].some(option => option.value === requestedProduct)) productSelect.value = requestedProduct;
+const requestedSpecs = new URLSearchParams(window.location.search);
+const requestedGrade = requestedSpecs.get('grade');
+const gradeSelect = document.querySelector('#quote-grade');
+if ([...gradeSelect.options].some(option => option.value === requestedGrade)) gradeSelect.value = requestedGrade;
+const requestedSize = requestedSpecs.get('size');
+if (requestedSize) form.querySelector('[name="size"]').value = requestedSize.slice(0, 100);

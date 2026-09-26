@@ -2,7 +2,6 @@
   const section = document.querySelector('.proof-strip');
   if (!section || !('IntersectionObserver' in window)) return;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  if (motion.matches) return;
   const formatter = new Intl.NumberFormat('en-IN', { useGrouping: false });
   const counters = [...section.querySelectorAll('.proof-grid > div > strong')]
     .filter(element => /^\d/.test(element.firstChild?.textContent || ''))
@@ -18,14 +17,23 @@
       return { number, target };
     });
   let frame = 0;
+  let started = false;
   const finish = () => {
     cancelAnimationFrame(frame);
     counters.forEach(({ number, target }) => { number.textContent = formatter.format(target); });
   };
   const observer = new IntersectionObserver(entries => {
-    if (!entries.some(entry => entry.isIntersecting)) return;
-    observer.disconnect();
+    const entry = entries[entries.length - 1];
+    if (!entry.isIntersecting) {
+      started = false;
+      finish();
+      return;
+    }
+    if (started || entry.intersectionRatio < 0.35) return;
+    started = true;
+    cancelAnimationFrame(frame);
     if (motion.matches) return finish();
+    counters.forEach(({ number }) => { number.textContent = '0'; });
     const start = performance.now();
     const tick = now => {
       const progress = Math.min((now - start) / 1800, 1);
@@ -36,9 +44,9 @@
       if (progress < 1) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
-  }, { threshold: 0.35 });
+  }, { threshold: [0, 0.35] });
   observer.observe(section);
   motion.addEventListener('change', () => {
-    if (motion.matches) { observer.disconnect(); finish(); }
+    if (motion.matches) finish();
   });
 })();

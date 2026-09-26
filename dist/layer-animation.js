@@ -22,10 +22,17 @@
   reduce.addEventListener('change', clear);
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
-      if (!started && entries.some(entry => entry.isIntersecting)) {
-        started = true; reveal(); observer.disconnect();
+      const entry = entries[entries.length - 1];
+      if (!entry.isIntersecting) {
+        started = false;
+        clear();
+        return;
       }
-    }, {threshold:0.3});
+      if (!started && entry.intersectionRatio >= 0.3) {
+        started = true;
+        reveal();
+      }
+    }, {threshold:[0, 0.3]});
     observer.observe(section.querySelector('.engineering-visual'));
   }
 })();

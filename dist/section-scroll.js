@@ -1,6 +1,7 @@
 (() => {
-  const sections = [...document.querySelectorAll('main > section:not(.proof-strip)')];
-  if (sections.length < 2) return;
+  const hero = document.querySelector('main > .hero');
+  const products = document.querySelector('#products');
+  if (!hero || !products) return;
   const desktop = matchMedia('(pointer: fine)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let locked = false;
@@ -25,6 +26,12 @@
         document.querySelector('#navigation.open')) return;
     const direction = Math.sign(event.deltaY);
     if (canScrollInside(event.target, direction)) return;
+    // Only the downward transition from the hero gets section navigation.
+    // All later sections and upward scrolling keep their native behavior.
+    if (!locked && (direction < 0 || hero.getBoundingClientRect().bottom <= 4)) {
+      accumulated = 0;
+      return;
+    }
     const now = performance.now();
     lastWheel = now;
     if (locked) { event.preventDefault(); return; }
@@ -37,25 +44,8 @@
     accumulated = 0;
 
     const y = scrollY;
-    const tops = sections.map(section => section.getBoundingClientRect().top + y);
-    tops[0] = 0;
-    const index = Math.max(0, tops.findLastIndex(top => top <= y + 4));
-    const top = tops[index];
-    const bottom = sections[index].getBoundingClientRect().bottom + y;
     const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
-    let destination;
-    // Keep every part of a long catalogue or form reachable before leaving it.
-    if (direction > 0) {
-      const lastPage = bottom - innerHeight;
-      destination = index > 0 && y < lastPage - 4
-        ? Math.min(y + innerHeight * 0.85, lastPage)
-        : (tops[index + 1] ?? max);
-    } else {
-      destination = y > top + 4 ? Math.max(top, y - innerHeight * 0.85)
-        : index > 0 ? Math.max(tops[index - 1], sections[index - 1].getBoundingClientRect().bottom + y - innerHeight) : 0;
-      if (index === 1 && y <= top + 4) destination = 0;
-    }
-    destination = Math.max(0, Math.min(max, destination));
+    const destination = Math.max(0, Math.min(max, products.getBoundingClientRect().top + y));
     if (Math.abs(destination - y) < 2) return;
     locked = true;
     const started = now;

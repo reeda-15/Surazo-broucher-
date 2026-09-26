@@ -3,7 +3,7 @@
   if (!section || !('IntersectionObserver' in window)) return;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   if (motion.matches) return;
-  const formatter = new Intl.NumberFormat('en-IN');
+  const formatter = new Intl.NumberFormat('en-IN', { useGrouping: false });
   const counters = [...section.querySelectorAll('.proof-grid > div > strong')]
     .filter(element => /^\d/.test(element.firstChild?.textContent || ''))
     .map(element => {

@@ -1,7 +1,7 @@
 (() => {
   const hero = document.querySelector('main > .hero');
-  const products = document.querySelector('#products');
-  if (!hero || !products) return;
+  const stats = document.querySelector('#stats');
+  if (!hero || !stats) return;
   const desktop = matchMedia('(pointer: fine)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let locked = false;
@@ -45,7 +45,7 @@
 
     const y = scrollY;
     const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
-    const destination = Math.max(0, Math.min(max, products.getBoundingClientRect().top + y));
+    const destination = Math.max(0, Math.min(max, stats.getBoundingClientRect().top + y));
     if (Math.abs(destination - y) < 2) return;
     locked = true;
     const started = now;

@@ -1,6 +1,6 @@
 (() => {
-  const section = document.querySelector('.proof-strip');
-  if (!section || !('IntersectionObserver' in window)) return;
+  if (!('IntersectionObserver' in window)) return;
+  document.querySelectorAll('.proof-strip').forEach(section => {
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const formatter = new Intl.NumberFormat('en-IN', { useGrouping: false });
   const counters = [...section.querySelectorAll('.proof-grid > div > strong')]
@@ -48,5 +48,6 @@
   observer.observe(section);
   motion.addEventListener('change', () => {
     if (motion.matches) finish();
+  });
   });
 })();

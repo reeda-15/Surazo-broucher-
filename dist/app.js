@@ -18,7 +18,7 @@ const gradeImages = {
  A125: ['application-pedestrian.webp', 'Surazo cover in a pedestrian walkway', 'Pedestrian spaces'],
  B125: ['application-footpath.webp', 'Surazo cover on a paved footpath beside the road; the illustrated cover is marked C250', 'Footpath setting · pictured cover marked C250'],
  C250: ['application-drainage.webp', 'Surazo drainage cover beside a kerb in rainfall', 'Kerb & channel drainage'],
- D400: ['application-utilities.webp', 'Surazo square cover installed in a roadway', 'Road & carriageway applications']
+ D400: ['application-utilities.webp', 'Surazo square manhole cover installed in a roadway', 'Road & carriageway applications']
 };
 let selectedGrade = 'D400';
 function selectGrade(tab) {

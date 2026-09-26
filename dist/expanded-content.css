@@ -82,3 +82,5 @@ html{scroll-padding-top:24px}
 #material-comparison .comparison-scroll tbody tr:nth-child(even){background:#f6f8f9}
 #material-comparison .comparison-scroll tbody td:last-child{background:#eaf5fb;color:#006a9c;font-weight:700}
 @media(max-width:700px){#material-comparison .comparison-scroll th,#material-comparison .comparison-scroll td{padding:15px}}
+
+.truck-load-explainer{margin:40px 0;display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center}.truck-load-explainer img{display:block;width:100%;height:auto}.truck-load-explainer figcaption h3{font-size:26px;line-height:1.25;margin:12px 0}.truck-load-explainer figcaption p{font-size:14px;color:var(--muted)}@media(max-width:700px){.truck-load-explainer{grid-template-columns:1fr;gap:22px}}

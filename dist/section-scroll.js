@@ -10,16 +10,14 @@
   let previousWheel = 0;
   let travelFrame = 0;
   let releaseFrame = 0;
-  let effects = [];
+  const stage = hero.parentElement;
+  const originalHeroTransform = hero.style.transform;
   const stopTransition = () => {
     cancelAnimationFrame(travelFrame);
     cancelAnimationFrame(releaseFrame);
-    effects.forEach(effect => effect.cancel());
-    effects = [];
+    hero.style.transform = originalHeroTransform;
+    stage.classList.remove('hero-slide-transition');
     locked = false;
-  };
-  const animate = (element, frames, options) => {
-    if (element?.animate) effects.push(element.animate(frames, options));
   };
   window.addEventListener('touchstart', stopTransition, { passive: true });
   window.addEventListener('keydown', event => {
@@ -68,35 +66,21 @@
     if (Math.abs(destination - y) < 2) return;
     locked = true;
     const started = now;
-    effects.forEach(effect => effect.cancel());
-    effects = [];
-    const duration = 1100;
-    const easing = 'cubic-bezier(.22,1,.36,1)';
-    animate(hero.querySelector('.hero-copy'), [
-      { opacity: 1, transform: 'translateY(0)' },
-      { opacity: 0.15, transform: 'translateY(-55px)' }
-    ], { duration: 850, easing, fill: 'forwards' });
-    animate(hero.querySelector('.hero-media'), [
-      { transform: 'scale(1)', opacity: 1 },
-      { transform: 'scale(.96)', opacity: 0.55 }
-    ], { duration, easing, fill: 'forwards' });
-    stats.querySelectorAll('.proof-grid > div').forEach((item, index) => {
-      animate(item, [
-        { opacity: 0, transform: 'translateY(38px)' },
-        { opacity: 1, transform: 'translateY(0)' }
-      ], { duration: 700, delay: 300 + index * 110, easing, fill: 'both' });
-    });
+    const duration = 1200;
+    stage.classList.add('hero-slide-transition');
     const travel = time => {
       const progress = Math.min((time - started) / duration, 1);
       const eased = progress < 0.5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
-      window.scrollTo({ top: y + (destination - y) * eased, behavior: 'instant' });
+      const distance = (destination - y) * eased;
+      hero.style.transform = `translateY(${distance * 0.85}px)`;
+      window.scrollTo({ top: y + distance, behavior: 'instant' });
       if (progress < 1) travelFrame = requestAnimationFrame(travel);
     };
     travelFrame = requestAnimationFrame(travel);
     const release = () => {
       const time = performance.now();
       const settled = Math.abs(scrollY - destination) < 3 || time - started > 1600;
-      if (settled && time - started > 1300 && time - lastWheel > 180) stopTransition();
+      if (settled && time - started > 1250 && time - lastWheel > 180) stopTransition();
       else releaseFrame = requestAnimationFrame(release);
     };
     releaseFrame = requestAnimationFrame(release);

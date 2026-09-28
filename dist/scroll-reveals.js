@@ -29,50 +29,50 @@
       if (reduce.matches || state.initiallyVisible || entry.target.contains(document.activeElement)) return;
       const siblings = [...entry.target.parentElement.children].filter(el => states.has(el));
       const compact = matchMedia('(max-width: 700px)').matches;
-      const step = compact ? 50 : 80;
-      const delay = Math.min(Math.max(siblings.indexOf(entry.target), 0) * step, 160);
+      const step = compact ? 35 : 55;
+      const delay = Math.min(Math.max(siblings.indexOf(entry.target), 0) * step, 110);
       const element = entry.target;
-      const rise = compact ? 24 : 40;
+      const rise = compact ? 16 : 24;
       let frames = [
         { opacity: 0, transform: `translateY(${rise}px)` },
         { opacity: 1, transform: 'translateY(0)' }
       ];
-      let duration = 700;
+      let duration = 900;
       if (element.matches('.section-heading, .material-heading, .size-intro, .credential-controls')) {
         frames = [
-          { opacity: 0, transform: 'translateY(28px)' },
+          { opacity: 0, transform: 'translateY(20px)' },
           { opacity: 1, transform: 'translateY(0)' }
         ];
-        duration = 750;
+        duration = 900;
       } else if (element.matches('.facility-photo, .load-visual, .detail-overview > figure, .detail-product-image')) {
         frames = [
-          { opacity: 0, transform: 'translateY(36px) scale(.92)', clipPath: 'inset(10% 5% 10% 5%)' },
-          { opacity: 1, transform: 'translateY(0) scale(1)', clipPath: 'inset(0% 0% 0% 0%)' }
-        ];
-        duration = 850;
-      } else if (element.matches('.product-card, .application-gallery > *, .size-options > article')) {
-        frames = [
-          { opacity: 0, transform: `translateY(${rise}px) scale(.96)` },
+          { opacity: 0, transform: 'translateY(24px) scale(.985)' },
           { opacity: 1, transform: 'translateY(0) scale(1)' }
         ];
-        duration = 750;
+        duration = 1000;
+      } else if (element.matches('.product-card, .application-gallery > *, .size-options > article')) {
+        frames = [
+          { opacity: 0, transform: `translateY(${rise}px) scale(.99)` },
+          { opacity: 1, transform: 'translateY(0) scale(1)' }
+        ];
+        duration = 900;
       } else if (element.matches('.about-copy, .facility-copy, .contact-copy')) {
         frames = [
-          { opacity: 0, transform: `translateX(-${compact ? 18 : 40}px)` },
+          { opacity: 0, transform: `translateX(-${compact ? 12 : 20}px)` },
           { opacity: 1, transform: 'translateX(0)' }
         ];
       } else if (element.matches('#quote-form')) {
         frames = [
-          { opacity: 0, transform: `translateY(${rise}px) scale(.97)` },
+          { opacity: 0, transform: `translateY(${rise}px) scale(.99)` },
           { opacity: 1, transform: 'translateY(0) scale(1)' }
         ];
       }
       state.animation = element.animate(frames, {
-        duration, delay, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards'
+        duration, delay, easing: 'cubic-bezier(.25,.46,.45,.94)', fill: 'backwards'
       });
       state.animation.onfinish = () => clear(state);
     });
-  }, { threshold: 0, rootMargin: '0px 0px -56px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px 64px 0px' });
   targets.forEach(el => observer.observe(el));
   document.addEventListener('focusin', event => {
     states.forEach((state, el) => { if (el.contains(event.target)) clear(state); });

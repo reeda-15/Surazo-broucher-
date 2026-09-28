@@ -1,2 +1,3 @@
 .story-iso-badges{position:relative;width:min(480px,100%);aspect-ratio:6/1;margin-top:28px;overflow:hidden}.story-iso-badges img{display:block;position:absolute;width:100%;height:auto;top:50%;transform:translateY(-50%)}
 .resources .story-iso-badges{grid-column:1/-1;justify-self:center;width:min(640px,100%);margin-top:12px}@media(max-width:600px){.resources .story-iso-badges{margin-top:8px}}
+#resources{padding-bottom:28px}#resources + .facility-section{padding-top:28px}@media(max-width:600px){#resources{padding-bottom:20px}#resources + .facility-section{padding-top:20px}}

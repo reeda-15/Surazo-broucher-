@@ -31,14 +31,51 @@
       // Leave content already on screen at page load, or being used, immediately readable.
       if (performance.now() < 400 || entry.target.contains(document.activeElement)) return;
       const siblings = [...entry.target.parentElement.children].filter(el => states.has(el));
-      const delay = Math.min(Math.max(siblings.indexOf(entry.target), 0) * 75, 225);
-      state.animation = entry.target.animate([
-        { opacity: 0.15, transform: 'translateY(28px)' },
+      const compact = matchMedia('(max-width: 700px)').matches;
+      const step = compact ? 85 : 140;
+      const delay = Math.min(Math.max(siblings.indexOf(entry.target), 0) * step, 420);
+      const element = entry.target;
+      const rise = compact ? 32 : 64;
+      let frames = [
+        { opacity: 0, transform: `translateY(${rise}px)` },
         { opacity: 1, transform: 'translateY(0)' }
-      ], { duration: 700, delay, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards' });
+      ];
+      let duration = 900;
+      if (element.matches('.section-heading, .material-heading, .size-intro, .credential-controls')) {
+        frames = [
+          { opacity: 0, transform: 'translateY(44px)', clipPath: 'inset(0 0 100% 0)' },
+          { opacity: 1, transform: 'translateY(0)', clipPath: 'inset(0 0 0% 0)' }
+        ];
+        duration = 1000;
+      } else if (element.matches('.facility-photo, .load-visual, .detail-overview > figure, .detail-product-image')) {
+        frames = [
+          { opacity: 0, transform: 'translateY(36px) scale(.92)', clipPath: 'inset(10% 5% 10% 5%)' },
+          { opacity: 1, transform: 'translateY(0) scale(1)', clipPath: 'inset(0% 0% 0% 0%)' }
+        ];
+        duration = 1100;
+      } else if (element.matches('.product-card, .application-gallery > *, .size-options > article')) {
+        frames = [
+          { opacity: 0, transform: `translateY(${rise}px) scale(.96)` },
+          { opacity: 1, transform: 'translateY(0) scale(1)' }
+        ];
+        duration = 1000;
+      } else if (element.matches('.about-copy, .facility-copy, .contact-copy')) {
+        frames = [
+          { opacity: 0, transform: `translateX(-${compact ? 18 : 40}px)` },
+          { opacity: 1, transform: 'translateX(0)' }
+        ];
+      } else if (element.matches('#quote-form')) {
+        frames = [
+          { opacity: 0, transform: `translateY(${rise}px) scale(.97)` },
+          { opacity: 1, transform: 'translateY(0) scale(1)' }
+        ];
+      }
+      state.animation = element.animate(frames, {
+        duration, delay, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards'
+      });
       state.animation.onfinish = () => clear(state);
     });
-  }, { threshold: 0, rootMargin: '0px 0px -24px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -56px 0px' });
   targets.forEach(el => observer.observe(el));
   document.addEventListener('focusin', event => {
     states.forEach((state, el) => { if (el.contains(event.target)) clear(state); });

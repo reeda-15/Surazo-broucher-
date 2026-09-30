@@ -6,3 +6,5 @@
 @media(max-width:600px){.trench-image-link{min-height:0;height:230px}.detail-header img{width:100px}.detail-header nav{gap:14px;font-size:12px}.detail-header .button{padding:10px;font-size:11px}.breadcrumbs{padding:23px 0;font-size:11px;gap:8px}.detail-hero,.detail-overview,.detail-info-grid,.related-products>div{grid-template-columns:1fr}.detail-hero{gap:30px;padding:0 0 45px}.detail-product-image{aspect-ratio:1.25}.detail-product-image img{padding:8px}.detail-copy h1{font-size:39px}.detail-copy .description{font-size:15px}.detail-section{padding:45px 0}.detail-info-grid{gap:30px}.detail-cta{padding:27px}.detail-cta h2{font-size:28px}.detail-footer{flex-direction:column;gap:10px}.related-products>div{gap:0}}
 
 .product-card > .product-image{display:block;z-index:2}.product-card > .product-image:focus-visible{outline:3px solid var(--blue);outline-offset:5px}
+
+.trench-section .trench-feature{margin-top:0}

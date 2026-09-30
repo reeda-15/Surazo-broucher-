@@ -12,3 +12,13 @@
 /* Give the worker image a little more breathing room. */
 .story-fullscreen .story-background{transform:scale(.9);transform-origin:left center}
 @media(max-width:600px){.story-fullscreen .story-background{transform-origin:center bottom}}
+
+/* Keep the homepage story and its following stats together on desktop. */
+@media(min-width:1001px){
+ .story-with-stats{min-height:min(590px,calc(100svh - 130px))}
+ .story-with-stats .about-grid{padding-top:22px;padding-bottom:22px}
+ .story-with-stats .about-copy h2{font-size:clamp(30px,2.7vw,40px);margin-bottom:14px}
+ .story-with-stats .about-copy p{line-height:1.6;margin-bottom:12px}
+ .story-with-stats .story-detail{margin:12px 0}
+ .story-with-stats + #stats .proof-grid{padding-top:22px;padding-bottom:22px}
+}

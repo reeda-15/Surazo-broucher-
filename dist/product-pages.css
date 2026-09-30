@@ -8,3 +8,10 @@
 .product-card > .product-image{display:block;z-index:2}.product-card > .product-image:focus-visible{outline:3px solid var(--blue);outline-offset:5px}
 
 .trench-section .trench-feature{margin-top:0}
+
+/* Center the visible products, accounting for transparent asset margins. */
+.product-card .product-image img{position:absolute;left:50%;top:50%;width:calc(100% - 24px);height:auto;padding:0;transform:translate(var(--product-x,-50%),var(--product-y,-50%));transform-origin:calc(-1 * var(--product-x,-50%)) calc(-1 * var(--product-y,-50%))}
+.product-card .product-image img[src$="p6-7.webp"]{--product-x:-57.235%;--product-y:-52.831%}
+.product-card .product-image img[src$="p6-6.webp"]{--product-x:-54.435%;--product-y:-52.721%}
+.product-card .product-image img[src$="p6-5.webp"]{--product-x:-57.235%;--product-y:-50.898%}
+.product-card:hover .product-image img{transform:translate(var(--product-x,-50%),var(--product-y,-50%)) scale(1.045)}

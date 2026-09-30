@@ -1,4 +1,4 @@
-.engineering-stack .engineering-visual{height:auto;min-height:660px;display:block;padding:20px 16px 70px;overflow:hidden}
+.engineering-stack .engineering-visual{background:transparent;height:auto;min-height:660px;display:block;padding:20px 16px 70px;overflow:hidden}
 .layer-stack{display:block;width:100%;height:auto;max-height:710px;overflow:visible}
 .engineering-stack .engineering-visual>span{left:20px;right:20px;bottom:23px;text-align:center}
 .stack-replay{display:block;margin:8px auto 0;border:1px solid #668492;border-radius:3px;background:transparent;color:#d6eaf3;font-size:12px;padding:9px 15px;min-height:44px}

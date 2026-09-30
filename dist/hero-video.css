@@ -27,3 +27,7 @@
 .hero-certifications img{display:block;position:absolute;top:50%;width:100%;height:auto;transform:translateY(-50%);filter:invert(1) hue-rotate(180deg)}
 .hero-film .hero-certifications + .hero-note{margin-top:20px}
 @media(max-width:600px){.hero-certifications{width:min(330px,100%);margin-top:22px}}
+
+.hero-film .hero-actions{flex-wrap:wrap;row-gap:16px}
+.hero-film .hero-actions .hero-compliance{display:inline-flex;align-items:center;gap:8px;margin:0;max-width:none;color:#fff;font-size:14px;font-weight:500;line-height:1.4;white-space:nowrap}
+.hero-film .hero-compliance svg{width:20px;height:20px;flex-shrink:0;color:#69d4f3}
